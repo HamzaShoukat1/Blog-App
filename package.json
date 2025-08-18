@@ -23,5 +23,9 @@
     "vite": "^7.0.4",
     "rollup": "^4.16.4",
     "tailwindcss": "^4.1.11"
-  }
+  },
+  "optionalDependencies": {
+  "@rollup/rollup-linux-x64-gnu": "^4.9.2"
+}
+
 }
