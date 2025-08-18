@@ -20,12 +20,11 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "^4.2.1",
-    "vite": "^7.0.4",
-    "rollup": "^4.16.4",
-    "tailwindcss": "^4.1.11"
+    "rollup": "^4.46.3",
+    "tailwindcss": "^4.1.11",
+    "vite": "^7.0.4"
   },
   "optionalDependencies": {
-  "@rollup/rollup-linux-x64-gnu": "^4.9.2"
-}
-
+    "@rollup/rollup-linux-x64-gnu": "^4.9.2"
+  }
 }
