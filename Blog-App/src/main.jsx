@@ -14,6 +14,7 @@ import Post from './Pages/Post.jsx'
 import Signup from './Pages/Signup.jsx'
 import { Loaderwrapper } from './Loader/Loaderwrapper.jsx'
 import ErrorPage from './Pages/Errorpage.jsx'
+import React from 'react'
 
 
 
