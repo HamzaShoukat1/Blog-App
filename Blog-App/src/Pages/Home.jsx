@@ -24,17 +24,17 @@ const latestPosts = [...allPosts]
 
 if(allPosts.length === 0){
   return (
-    <div className='w-full bg-gray-500  bg-gradient-to-b from-gray-500 via-gray-600 to-gray-700 py-26 items-center    mt-4 text-center'>
+    <div className='w-full bg-gray-500  bg-gradient-to-b from-gray-500 via-gray-700 to-gray-700 py-26 items-center    mt-2 text-center'>
       <Container>
         <div className='flex flex-wrap  '> 
-          <div className='py-15 w-full'>
-            <motion.h1 className='text-5xl  text-transparent bg-clip-text bg-gradient-to-l   from-gray-200 to-gray-600  font-bold'
+          <div className='py-20 w-full'>
+            <motion.h1 className='text-5xl     bg-clip-text   bg-white/100  font-bold'
             initial={{opacity: 0 , x:40}}
             animate={{opacity:1,x:0}}
             transition={{duration:1, ease: 'easeOut'}}
             >
               
-              <span className='capitalize '>Login to read posts</span>
+              <span className=' '>login to read posts</span>
 
             </motion.h1>
           </div>
