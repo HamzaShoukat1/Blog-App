@@ -12,6 +12,14 @@
     {
       "src": "/(.*)",
       "dest": "/index.html"
-    }
+    },
+    {
+  "buildCommand": "npm install && npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "builds": [
+    { "src": "package.json", "use": "@vercel/static-build" }
+  ]
+}
   ]
 }
