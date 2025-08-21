@@ -11,6 +11,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@tinymce/tinymce-react": "^6.3.0",
     "appwrite": "^18.2.0",
+    "build": "^0.1.4",
     "framer-motion": "^12.23.12",
     "html-react-parser": "^5.2.6",
     "prop-types": "^15.8.1",
