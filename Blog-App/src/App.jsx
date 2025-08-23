@@ -6,11 +6,10 @@ import { Outlet } from 'react-router-dom'
 import {login ,logout,setPending} from './Store/AuthSlice'
 import { Loaderworking } from './Loader/Loaderworking'
 import {Toaster} from 'react-hot-toast'
-function App() {
 
+function App() {
   const dispatch = useDispatch()
   const authStatus = useSelector((state)=> state.auth.status)
-  const status = useSelector(state=>state.auth.status)
 
 
 
@@ -22,17 +21,12 @@ function App() {
 
       if(userData){
         dispatch(login(userData)) //We tell Redux: "The user is logged in."
-
-
-
       }else{
-        dispatch(logout())
+        dispatch(logout())  
       }
     
     })
     
-     
-   
   }, [dispatch])
 
   return authStatus !== 'pending' ? (
@@ -69,7 +63,6 @@ function App() {
   ) : (
     <div className='flex justify-center items-center h-screen text-white text-lg'>
       loading...
-      
     </div>
   )
 

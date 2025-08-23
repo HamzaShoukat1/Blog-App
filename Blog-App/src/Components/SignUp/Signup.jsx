@@ -5,10 +5,9 @@ import {Button,Input,Logo} from '../index'
 import { login } from "../../Store/AuthSlice";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-
+import toast from "react-hot-toast";
  function Signup(){
   const navigate = useNavigate()
-
   const [error, setError] = useState("")
   const dispatch = useDispatch()
   const {register, handleSubmit,formState:{errors,isSubmitting}} = useForm()
@@ -19,12 +18,18 @@ import { useForm } from "react-hook-form";
     setError("")
     try {
       const session = await authService.createAccount(data)
+
       if(session) {
+        toast.success("Account Created Successfully",{
+          position:'top-right'
+        })
+        const userData = await authService.getCurrentUser()
+        if(userData) dispatch(login(userData))
+          navigate('/')
+
         navigate("/login")
 
-//  const userData =  await authService.getCurrentUser()
-//  if(userData)  dispatch(login(userData))
-//   navigate('/')
+
 }
     } catch (error) {
       setError(error.message)
@@ -42,6 +47,7 @@ import { useForm } from "react-hook-form";
 
   return (
     <div className="flex items-center justify-center">
+
       <div className={`mx-auto w-full max-w-md bg-gray-100 rounded-xl p-10 border border-black/100`}>
       {/* //Logo */}
       <div className="mb-2 justify-center">
@@ -65,6 +71,7 @@ import { useForm } from "react-hook-form";
            
 
         <form onSubmit={handleSubmit(create)}>
+          
           <div className="space-y-1">
             <Input 
             label='Full Name'

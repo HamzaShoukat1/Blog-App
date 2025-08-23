@@ -9,8 +9,6 @@ export class AuthService {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId)
-
-      
     this.account = new Account(this.client)
   }
 
@@ -57,18 +55,7 @@ export class AuthService {
   }
 
   async logout() {
-  //   try {
-  //   const user = await this.getCurrentUser(); // Check if user is logged in
-  //   if (user) {
-  //     await this.account.deleteSession("current");
-  //     console.log("Successfully logged out");
-  //   } else {
-  //     console.log("No active session to logout.");
-  //   }
-  // } catch (error) {
-  //   console.error("Logout failed:", error);
-  //   throw error;
-  // }
+  
   try {
     await this.account.deleteSession('current');
     console.log("Successfully logged out");

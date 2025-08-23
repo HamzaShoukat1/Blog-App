@@ -56,7 +56,7 @@ function Header() {
             <li key={item.name}>
               <button
               onClick={()=> navigate(item.slug)}
-              className=' px-4 text-base font-semibold py-3 cursor-pointer'
+              className=' px-6 text-base font-semibold py-3 cursor-pointer'
               >{item.name}</button>
             </li>
 
@@ -68,7 +68,7 @@ function Header() {
 
 
           {isLogedin && ( 
-            <li className=' '>
+            <li>
               <LogoutBtn />
             </li>
           )}

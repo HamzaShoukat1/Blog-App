@@ -19,7 +19,6 @@ function Login() {
     setError("")
     try {
       const currentUser = await authService.getCurrentUser();
-
     // If there's already a logged-in user, navigate directly
     if (currentUser) {
       dispatch(StoreLogin(currentUser));
@@ -42,10 +41,10 @@ function Login() {
   }
   return (
     <div className='flex items-center justify-center w-full'>
-      <div className={`mx-auto w-full max-w-md bg-gray-100 rounded-xl p-10 border border-black/100`}>
+      <div className={`mx-auto w-full max-w-[420px] bg-gray-100 rounded-xl p-10 border border-black/100`}>
       {/* //Logo */}
       <div className='mb-2 flex justify-center'>
-        <span className='inline-block w-full max-w-[100px]'>
+        <span className=' w-full max-w-[100px]'>
           <Logo width='100%' />
         </span>
 
@@ -56,7 +55,7 @@ function Login() {
       Don't have any account?&nbsp;
       <Link
       to="/signup"
-      className='font-medium text-primary transition-all duration-200 hover: underline'
+      className='font-medium text-primary transition-all mr-1 duration-200 hover:underline'
       > 
       Sign up
 
@@ -64,7 +63,7 @@ function Login() {
       </p>
      
 
-        <form onSubmit={handleSubmit(login)} className='mt-4'>
+        <form onSubmit={handleSubmit(login)} className='pt-4'>
           <div className='space-y-2'>
             <Input
             label="email:"
