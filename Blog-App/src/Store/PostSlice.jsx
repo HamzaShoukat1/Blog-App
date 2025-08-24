@@ -6,6 +6,8 @@ export const fetchAllPosts = createAsyncThunk(
   'posts/fetchAllPosts',
   async ()=>{
     const res = await appwriteService.getPosts()
+     console.log("Fetched posts:", res); 
+
     return res?.documents|| []
   },
 
@@ -52,7 +54,7 @@ const PostSlice = createSlice({
         state.status = 'failed'
       })
       .addCase(getPostbyId.pending,(state)=>{
-        state.status = 'laoding'
+        state.status = 'loading'
         state.error = null
       })
       .addCase(getPostbyId.fulfilled,(state,action)=>{

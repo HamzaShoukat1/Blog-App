@@ -34,7 +34,7 @@ id='status'
 
         options={['active', 'inactive']}
         className='mb-4 mt-2 p-2 w-full cursor-pointer'
-        {...register('status', { required: false })}
+        {...register('status', { required: true })}
       />
 
       <Button

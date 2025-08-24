@@ -17,6 +17,7 @@ export class Service{
     try {
       
       return await this.databases.createDocument(
+
          conf.appwriteDatabaseId,
          conf.appwritecollectionId,
          slug,
@@ -26,9 +27,9 @@ export class Service{
           featuredimage,
           status,
           userid,
-         }
-
-      )
+         },
+         
+        )
       
     } catch (error) {
       console.log("appwrite sercie:: createPost::" ,error)
@@ -92,11 +93,16 @@ export class Service{
   }; 
   async getPosts(queries = [Query.equal("status","active")]){ // /all active post return krna queries used for filters (used with indexes only thats why we ccreate index in appwrite article section,index name is status in inside appwrite)
     try {
-      return this.databases.listDocuments(
+      return await this.databases.listDocuments(
         conf.appwriteDatabaseId,
         conf.appwritecollectionId,
-        queries,
+        [
+          ...queries,
+          Query.limit(100),
+          Query.orderDesc('$createdAt'),
+        ]
       )
+
       
     } catch (error) {
       console.log("appwrite error:: getPosts",error);

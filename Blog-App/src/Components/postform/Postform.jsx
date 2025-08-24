@@ -8,6 +8,7 @@ import PostMainFields from './Postmainfields'
 import PostSidebarFields from './PostSidebarfield'
 import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
+import { fetchAllPosts } from '../../Store/PostSlice'
 function Postform({post}) {
    const navigate = useNavigate()
    const dispatch = useDispatch()
@@ -42,6 +43,7 @@ function Postform({post}) {
         toast.success('Post updated successfully!')
       
         if(updPost){
+
           navigate(`/post/${updPost.$id}`)
 
         }
@@ -69,9 +71,12 @@ function Postform({post}) {
           ...data,
           userid: userData.$id
         })
-         toast.success('Post created successfully!')
-       
+        
+        toast.success('Post created successfully!')
+        
         if(dbpost){
+          console.log("Created post:", dbpost); 
+          dispatch(fetchAllPosts())
           navigate(`/post/${dbpost.$id}`)
         }
         setsubmitError(errors.message)
