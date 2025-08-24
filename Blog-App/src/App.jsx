@@ -30,9 +30,8 @@ function App() {
     
   }, [dispatch])
 
-  // if (authStatus === 'pending') {
-  //   return <Loaderworking />;
-  // }
+
+
 
   return (
     <div className='min-h-screen flex flex-wrap content-between bg-gray-500'>

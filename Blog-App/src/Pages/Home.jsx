@@ -63,7 +63,7 @@ return (
       <h1 className='text-2xl font-semibold mb-5'>Latest Posts</h1>
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 '>
         {latestPosts.map((post)=>(
-          <div key={post.$id} className='p-0 md:p-3'>
+          <div key={post.$id} className='p-0 md:p-3 transition-all ease-in-out duration-200'>
             <PostCard post={post} />
           </div>
 
