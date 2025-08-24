@@ -6,15 +6,18 @@ import { Outlet } from 'react-router-dom'
 import {login ,logout,setPending} from './Store/AuthSlice'
 import { Loaderworking } from './Loader/Loaderworking'
 import {Toaster} from 'react-hot-toast'
+import useLoader from './Loader/Loader'
 
 function App() {
   const dispatch = useDispatch()
   const authStatus = useSelector((state)=> state.auth.status)
   const status = useSelector(state=> state.posts.status)
+  const {loading, setLoading} = useLoader()
 
 
 
   useEffect(() => {
+    setLoading(true)
     dispatch(setPending())
     authService.getCurrentUser()
     .then((userData)=>{
@@ -27,8 +30,14 @@ function App() {
       }
     
     })
+  
+    
     
   }, [dispatch])
+  
+useEffect(() => {
+status !== 'loading' && setLoading(false)
+}, [setLoading,status])
 
 
 
