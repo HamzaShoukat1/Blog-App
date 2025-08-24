@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const initialState = {
-  status: 'pending',
+  status: 'idle',
   userData: null,
 
 }
