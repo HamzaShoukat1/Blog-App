@@ -18,8 +18,11 @@ const latestPosts = [...allPosts]
   
 
   useEffect(() => {
-    dispatch(fetchAllPosts())
-  }, [dispatch])
+    if(status === 'idle'){
+
+      dispatch(fetchAllPosts())
+    }
+  }, [dispatch],status)
     if (status === 'loading') return <p className="text-center mt-8">...</p>
 
 if(allPosts.length === 0){
