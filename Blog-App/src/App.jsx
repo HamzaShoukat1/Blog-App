@@ -10,6 +10,7 @@ import {Toaster} from 'react-hot-toast'
 function App() {
   const dispatch = useDispatch()
   const authStatus = useSelector((state)=> state.auth.status)
+  const status = useSelector(state=> state.posts.status)
 
 
 
@@ -37,7 +38,7 @@ function App() {
         <main>
           <Outlet />
         </main>
-       {   <Footer  />}
+       {status === 'succeeded' &&   <Footer  />}
        <Toaster
        position='top-center'
        toastOptions={{
@@ -61,9 +62,10 @@ function App() {
     </div>
 
   ) : (
-    <div className='flex justify-center items-center h-screen text-white text-lg'>
-      loading...
-    </div>
+    // <div className='flex justify-center items-center h-screen text-white text-lg'>
+    //   loading...
+    // </div>
+    null
   )
 
   

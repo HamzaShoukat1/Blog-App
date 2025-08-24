@@ -12,7 +12,7 @@ export const Loaderworking =  ()=>{
     const timer = setTimeout(()=>{
       setLoading(false)
 
-    },400)
+    },300)
     return ()=>{
       clearTimeout(timer)
     }

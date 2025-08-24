@@ -18,12 +18,10 @@ const latestPosts = [...allPosts]
   
 
   useEffect(() => {
-
       dispatch(fetchAllPosts())
   }, [dispatch])
-    if (status === 'loading') return <p className="text-center mt-8">...</p>
 
-if(allPosts.length === 0){
+if( status === 'succeeded' && allPosts.length === 0){
   return (
     <div className='w-full bg-gray-500  bg-gradient-to-b from-gray-500 via-gray-700 to-gray-700 py-26 items-center    mt-2 text-center'>
       <Container>
