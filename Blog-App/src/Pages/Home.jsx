@@ -1,4 +1,4 @@
-import React ,{useState,useEffect}from 'react'
+import React ,{useState,useEffect, useMemo}from 'react'
 import appwriteService from '../Appwrite/config'
 import { Container } from '../Components'
 import PostCard from '../Components/Postcard/PostCard'
@@ -10,16 +10,29 @@ function Home() {
 
   const dispatch = useDispatch()
   const {allPosts,status} = useSelector(state=>state.posts)
-const latestPosts = [...allPosts]
-  .sort((a, b) => new Date(b.$createdAt) - new Date(a.$createdAt))
-  .slice(0, 8)
+
+const latestPosts = useMemo(()=>{
+  return [...allPosts]
+  .sort((a,b)=> new Date(b.$createdAt) -  new Date(a.$createdAt))
+  .slice(0,8)
+})
+
 
   
   
 
   useEffect(() => {
-      dispatch(fetchAllPosts())
-  }, [dispatch])
+    if(status === 'idle'){
+      dispatch(fetchAllPosts()) 
+
+    }
+  }, [dispatch,status])
+
+  if (status === 'loading') {
+  return (
+ null
+  );
+}
 
 if( status === 'succeeded' && allPosts.length === 0){
   return (
