@@ -7,12 +7,11 @@ import { fetchAllPosts } from '../Store/PostSlice'
 
 function Allposts() {
 const dispatch = useDispatch()
-const {allPosts,status} = useSelector(state=> state.posts)
+const {allPosts} = useSelector(state=> state.posts)
   useEffect(() => {
    dispatch(fetchAllPosts())
    
   }, [dispatch])
-      if (status === 'loading') return <p className="text-center mt-8"></p>
 
   
   return (

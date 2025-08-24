@@ -30,48 +30,38 @@ function App() {
     
   }, [dispatch])
 
-  return authStatus !== 'pending' ? (
+  // if (authStatus === 'pending') {
+  //   return <Loaderworking />;
+  // }
+
+  return (
     <div className='min-h-screen flex flex-wrap content-between bg-gray-500'>
       <div className='w-full block'>
-        <Loaderworking  />
         <Header />
         <main>
+          <Loaderworking />
           <Outlet />
         </main>
-       {status === 'succeeded' &&   <Footer  />}
-       <Toaster
-       position='top-center'
-       toastOptions={{
-        duration: 3000,
-        style:{
-          background: '#333',
-          color: '#fff',
-        },
-        success:{
-          iconTheme: {
-            primary: '#4ade80',
-            secondary: '#fff',
-          },
-
-         
-        }
-       }}
-
+        {status === 'succeeded' && <Footer />}
+        <Toaster
+          position='top-center'
+          toastOptions={{
+            duration: 3000,
+            style: {
+              background: '#333',
+              color: '#fff',
+            },
+            success: {
+              iconTheme: {
+                primary: '#4ade80',
+                secondary: '#fff',
+              },
+            },
+          }}
         />
       </div>
     </div>
-
-  ) : (
-    // <div className='flex justify-center items-center h-screen text-white text-lg'>
-    //   loading...
-    // </div>
-    null
-  )
-
-  
-  
-  
- 
+  );
 }
 
 export default App
