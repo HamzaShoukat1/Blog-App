@@ -29,10 +29,10 @@ function PostCard({post}) {
   
   return (
     <Link to={`/post/${$id}`}>
-      <div className='w-full  bg-gray-400 hover:bg-gray-500 transition ease-in-out duration-400 rounded-md p-1 '>
+      <div className='w-full  bg-gray-400 hover:bg-gray-300  transition ease-in-out duration-400 rounded-md p-1 '>
         <div className='w-full justify-center mb-4'>
           <img 
-          className='rounded-md'
+          className='rounded-md w-70 h-40  '
           src={preview}
           // onError={(e)=>{e.currentTarget.src = localimg}}
           // onError={(e)=> {e.currentTarget.src = localimg}}
@@ -40,7 +40,7 @@ function PostCard({post}) {
            />
 
         </div>
-        <h2 className='text-base font-bold '>{title}</h2>
+        <h2 className='text-base  font-bold '>{title}</h2>
       </div>
     </Link>
   )

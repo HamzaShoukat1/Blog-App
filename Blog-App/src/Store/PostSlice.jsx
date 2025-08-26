@@ -6,7 +6,7 @@ export const fetchAllPosts = createAsyncThunk(
   'posts/fetchAllPosts',
   async ()=>{
     const res = await appwriteService.getPosts()
-     console.log("Fetched posts:", res); 
+    //  console.log("Fetched posts:", res); 
 
     return res?.documents|| []
   },
@@ -14,7 +14,8 @@ export const fetchAllPosts = createAsyncThunk(
 )
 
 
-export const getPostbyId = createAsyncThunk('posts/getPostbyId',
+export const getPostbyId = createAsyncThunk(
+  'posts/getPostbyId',
   async(slug)=>{
     const res = await appwriteService.getPost(slug)
     return res 

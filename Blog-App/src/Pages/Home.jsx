@@ -22,16 +22,13 @@ const latestPosts =
  
 
 
-  useEffect(() => {
-  console.log("Updated posts in Home:", allPosts);
-}, [allPosts]);
   
 
   useEffect(() => {
-    // if(status === 'idle'){
+    if(status === 'idle'){
       dispatch(fetchAllPosts()) 
 
-    // }
+    }
   }, [dispatch])
 
   if (status === 'loading') {
@@ -46,7 +43,7 @@ if( status === 'succeeded' && allPosts.length === 0){
       <Container>
         <div className='flex flex-wrap  '> 
           <div className='py-20 w-full'>
-            <motion.h1 className='text-5xl     bg-clip-text   bg-white/100  font-bold'
+            <motion.h1 className='text-5xl bg-clip-text  bg-white/100  font-bold'
             initial={{opacity: 0 , x:40}}
             animate={{opacity:1,x:0}}
             transition={{duration:1, ease: 'easeOut'}}
@@ -66,7 +63,7 @@ if( status === 'succeeded' && allPosts.length === 0){
 return (
   <div className=' '>
     <Container>
-     {status === 'succeeded' &&  <h1 className='text-2xl font-semibold mb-5'>Latest Posts</h1>}
+     {status === 'succeeded' &&  <h1 className='text-2xl font-semibold mb-3'>Latest Posts</h1>}
       <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-4 '>
         {latestPosts.map((post)=>(
           <div key={post.$id} className='p-0 md:p-3 transition-all ease-in-out duration-200'>

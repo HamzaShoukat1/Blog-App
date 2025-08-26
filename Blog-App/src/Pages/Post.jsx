@@ -3,7 +3,6 @@ import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import parse from 'html-react-parser';
 import toast from 'react-hot-toast';
-// Components & Services
 import { Button, Container } from '../Components';
 import ConfirmDialog from '../Components/Popups/ConfirmDialogue';
 import appwriteService from '../Appwrite/config';
@@ -58,7 +57,7 @@ function Post() {
 
   }, [currentPost])
   
-  
+
   // Delete Post
   const deletePost = () => {
     appwriteService.deletePost(currentPost.$id).then((status) => {
@@ -95,9 +94,9 @@ function Post() {
 
   // Main Render
   return currentPost ? (
-    <div className="py-8">
+    <div className="py-2">
       <Container>
-        <div className="w-full flex justify-center mb-4 relative border rounded-md p-5">
+        <div className="w-full flex justify-center mb-3 relative border rounded-md p-4">
           {previewUrl && (
             <img
                src={previewUrl}
