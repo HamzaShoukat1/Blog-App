@@ -1,5 +1,5 @@
 import conf from '../conf/conf.js'
-import { Client , ID, Databases,Storage,Query } from 'appwrite'
+import { Client , ID, Databases,Storage,Query, Permission,Role } from 'appwrite'
 
 export class Service{
   client = new Client();
@@ -121,6 +121,9 @@ export class Service{
         conf.appwriteBucketId,
         ID.unique(),
         file,
+        [
+            Permission.read(Role.users()),
+        ]
        )
       
     } catch (error) {
@@ -152,8 +155,9 @@ export class Service{
     return this.storage.getFileView(
       conf.appwriteBucketId,
       fileId
-    ).toString()
+    ).toString()  
   }
+
   async getPostByTitle (title){
     try {
       return await this.databases.listDocuments(conf.appwriteDatabaseId,conf.appwritecollectionId,[

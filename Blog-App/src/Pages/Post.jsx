@@ -12,6 +12,7 @@ import appwriteService from '../Appwrite/config';
 import { clearCurrentPost, getPostbyId } from '../Store/PostSlice';
 
 function Post() {
+  const [previewUrl, setPreviewUrl] = useState(null)
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +25,7 @@ function Post() {
     ? currentPost.userid === userData.$id
     : false;
 
-  const localFallbackImage = '/images.jpg';
+  // const localFallbackImage = '/images.jpg';
 
   useEffect(() => {
     dispatch(getPostbyId(slug));
@@ -34,6 +35,30 @@ function Post() {
     };
   }, [slug, dispatch]);
 
+
+
+  //for fetch post img
+  useEffect(() => {
+    const fetchPreview = async ()=>{
+      if(currentPost?.featuredimage){
+
+        try {
+          const preview = await appwriteService.getFileView(currentPost.featuredimage)
+
+          setPreviewUrl(preview)
+          
+        } catch (error) {
+          console.error("err fetching preview",error)
+          
+        }
+      }
+
+    };
+    fetchPreview()
+
+  }, [currentPost])
+  
+  
   // Delete Post
   const deletePost = () => {
     appwriteService.deletePost(currentPost.$id).then((status) => {
@@ -73,14 +98,14 @@ function Post() {
     <div className="py-8">
       <Container>
         <div className="w-full flex justify-center mb-4 relative border rounded-md p-5">
-          {currentPost.featuredimage && (
+          {previewUrl && (
             <img
-              src={appwriteService.getFileView(currentPost.featuredimage)}
+               src={previewUrl}
               alt={currentPost.title}
-              className="rounded-xl w-2xl"
-              onError={(e) => {
-                e.currentTarget.src = localFallbackImage;
-              }}
+              className="rounded-xl w-2xl"  
+              // onError={(e) => {
+              //   e.currentTarget.src = localFallbackImage;
+              // }}
             />
           )}
 
