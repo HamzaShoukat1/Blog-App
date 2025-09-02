@@ -31,7 +31,7 @@ export default function Protected({children, authentication = true}){
   }
 
 
-  return  <>{children}</>
+  return    <>{children}</>
 
 }
 

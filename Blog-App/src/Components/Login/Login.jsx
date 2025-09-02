@@ -40,8 +40,8 @@ function Login() {
     }
   }
   return (
-    <div className='flex items-center justify-center w-full'>
-      <div className={`mx-auto w-full max-w-[420px] bg-gray-100 rounded-xl p-10 border border-black/100`}>
+    <div className='flex  items-center justify-center   w-full'>
+      <div className={`mx-auto w-full max-w-[400px]  bg-gray-100 rounded-xl p-5 border border-black/100`}>
       {/* //Logo */}
       <div className='mb-2 flex justify-center'>
         <span className=' w-full max-w-[100px]'>
@@ -63,7 +63,7 @@ function Login() {
       </p>
      
 
-        <form onSubmit={handleSubmit(login)} className='pt-4'>
+        <form onSubmit={handleSubmit(login)} className='pt-3'>
           <div className='space-y-2'>
             <Input
             label="email:"

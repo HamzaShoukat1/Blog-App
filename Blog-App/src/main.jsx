@@ -15,16 +15,18 @@ import Signup from './Pages/Signup.jsx'
 import { Loaderwrapper } from './Loader/Loaderwrapper.jsx'
 import ErrorPage from './Pages/Errorpage.jsx'
 import React from 'react'
+import AuthDesign from './Pages/AuthDesign.jsx'
 
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route  path='/' element={<App />}
+    <Route  path = '/' element={<App />}
     errorElement={<ErrorPage />}
     >
       <Route path='/' element={<Home />} />
-      <Route path='/login' element={(
+     <Route element={<AuthDesign />}>
+       <Route path='/login' element={(
         <AuthLayout authentication={false}>
           <Login />
         </AuthLayout>
@@ -35,6 +37,8 @@ const router = createBrowserRouter(
           <Signup />
         </AuthLayout>
       )} />
+     </Route>
+
       <Route path='/all-posts' element={(
         <AuthLayout authentication={true}>
           <Allposts />
@@ -64,7 +68,7 @@ createRoot(document.getElementById('root')).render(
   <StrictMode>
   <Provider store={store}>
    <Loaderwrapper>
-     < RouterProvider router={router} />
+     <RouterProvider router={router} />
    </Loaderwrapper>
   </Provider>
   </StrictMode>,

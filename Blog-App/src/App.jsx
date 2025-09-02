@@ -5,9 +5,12 @@ import { Footer,Header } from './Components'
 import { Outlet } from 'react-router-dom'
 import {login ,logout,setPending} from './Store/AuthSlice'
 import { Loaderworking } from './Loader/Loaderworking'
+import { useLocation } from 'react-router-dom'
+
 import {Toaster} from 'react-hot-toast'
 
 function App() {
+ 
   const dispatch = useDispatch()
   const authStatus = useSelector((state)=> state.auth.status)
   const status = useSelector(state=> state.posts.status)
@@ -30,12 +33,15 @@ function App() {
     
   }, [dispatch])
 
+   const location = useLocation()
+    const hideHeader = ['/login','/signup'].includes(location.pathname)
+
  
   return (
     <div className='min-h-screen flex flex-wrap content-between bg-gray-500'>
       <div className='w-full block'>
           <Loaderworking />
-        <Header />
+       {!hideHeader &&  <Header />}
         <main>
           <Outlet />
         </main>
