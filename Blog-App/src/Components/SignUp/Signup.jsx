@@ -27,12 +27,14 @@ import toast from "react-hot-toast";
         if(userData) dispatch(login(userData))
           navigate('/')
 
-        navigate("/login")
+        // navigate("/login")
 
 
 }
     } catch (error) {
-      setError(error.message)
+      setError(toast.error("email already exist",{
+        position:"top-right"
+      }))
     }
   }
 
