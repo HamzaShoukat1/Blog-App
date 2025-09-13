@@ -1,5 +1,4 @@
-import React, {useId} from 'react'
-
+import React, { useId} from 'react'
 const Input = React.forwardRef(function Input({
   label,
   type = 'text',
@@ -20,7 +19,7 @@ const Input = React.forwardRef(function Input({
         
         <input
         type={type}
-        className={`px-4 py-2 w-full  focus:border-gray-400 rounded-lg bg-white text-black outline-none border border-gray-200 ${className}`} 
+        className={`px-4 py-2 w-full  focus:border-gray-400 rounded-lg bg-white text-black outline-none border border-gray-200 ${className} `} 
         ref={ref}
         {...props}
         id={id}
@@ -32,3 +31,4 @@ const Input = React.forwardRef(function Input({
 })
 
 export default Input
+

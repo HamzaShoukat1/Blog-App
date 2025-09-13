@@ -6,25 +6,27 @@ import toast from 'react-hot-toast';
 import { Button, Container } from '../Components';
 import ConfirmDialog from '../Components/Popups/ConfirmDialogue';
 import appwriteService from '../Appwrite/config';
-
-// Redux Actions
+import { getFileView } from '../Store/PostSlice';
 import { clearCurrentPost, getPostbyId } from '../Store/PostSlice';
 
+
+
 function Post() {
-  const [previewUrl, setPreviewUrl] = useState(null)
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { slug } = useParams();
 
-  const { currentPost, status } = useSelector((state) => state.posts);
-  const userData = useSelector((state) => state.auth.userData);
+  const { currentPost, status ,fileview} = useSelector((state) => state.posts);
+  const imageUrl = fileview[currentPost?.featuredimage]
 
+  
+  const userData = useSelector((state) => state.auth.userData);
   const isAuthor = currentPost && userData
     ? currentPost.userid === userData.$id
     : false;
 
-  // const localFallbackImage = '/images.jpg';
+  const localFallbackImage = '/images.jpg';
 
   useEffect(() => {
     dispatch(getPostbyId(slug));
@@ -37,26 +39,14 @@ function Post() {
 
 
   //for fetch post img
-  useEffect(() => {
-    const fetchPreview = async ()=>{
-      if(currentPost?.featuredimage){
+ useEffect(() => {
+   if(currentPost?.featuredimage && !imageUrl){
+    dispatch(getFileView(currentPost?.featuredimage))
+    console.log("fileView:", fileview)
 
-        try {
-          const preview = await appwriteService.getFileView(currentPost.featuredimage)
-
-          setPreviewUrl(preview)
-          
-        } catch (error) {
-          console.error("err fetching preview",error)
-          
-        }
-      }
-
-    };
-    fetchPreview()
-
-  }, [currentPost])
-  
+   }
+ }, [currentPost?.featuredimage,dispatch,imageUrl])
+ 
 
   // Delete Post
   const deletePost = () => {
@@ -97,16 +87,15 @@ function Post() {
     <div className="py-2">
       <Container>
         <div className="w-full flex justify-center mb-3 relative border rounded-md p-4">
-          {previewUrl && (
             <img
-               src={previewUrl}
+               src={imageUrl || localFallbackImage}
               alt={currentPost.title}
               className="rounded-xl w-2xl"  
-              // onError={(e) => {
-              //   e.currentTarget.src = localFallbackImage;
-              // }}
+              onError={(e) => {
+                e.currentTarget.src = localFallbackImage;
+              }}
             />
-          )}
+
 
           {/* Author Controls */}
           {isAuthor && (
@@ -131,8 +120,7 @@ function Post() {
                 onClose={handleCancel}
                 onConfirm={handleConfirm}
 
-                title="Delete this post?"
-                content="Are you sure you want to delete this post? This action cannot be undone."
+               
 
               />
 

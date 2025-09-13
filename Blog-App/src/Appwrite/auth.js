@@ -1,3 +1,4 @@
+import toast from 'react-hot-toast';
 import conf from '../conf/conf'
 import { Client , Account , ID } from 'appwrite'
 
@@ -9,6 +10,7 @@ export class AuthService {
     this.client
       .setEndpoint(conf.appwriteUrl)
       .setProject(conf.appwriteProjectId)
+      
     this.account = new Account(this.client)
   }
 
@@ -43,10 +45,12 @@ export class AuthService {
   }
 
   async getCurrentUser() {
+    
     try {
       // This will throw if no active session exists
       const user = await this.account.get(); 
       console.log("Current user session:", user);
+      
       return user;
     } catch (error) {
       console.log("No active session:", error.message);
@@ -70,3 +74,5 @@ export class AuthService {
 
 const authService = new AuthService();
 export default authService;
+
+

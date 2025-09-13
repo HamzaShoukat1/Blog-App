@@ -24,7 +24,9 @@ import toast from "react-hot-toast";
           position:'top-right'
         })
         const userData = await authService.getCurrentUser()
+        
         if(userData) dispatch(login(userData))
+          
           navigate('/')
 
         // navigate("/login")

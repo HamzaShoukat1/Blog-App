@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux'
 import authService from '../../Appwrite/auth'
 import { useForm } from 'react-hook-form'
 import { current } from '@reduxjs/toolkit'
-
+import toast from 'react-hot-toast'
 
 function Login() {
   const navigate = useNavigate()
@@ -18,24 +18,28 @@ function Login() {
   const login = async(data)=>{
     setError("")
     try {
-      const currentUser = await authService.getCurrentUser();
-    // If there's already a logged-in user, navigate directly
-    if (currentUser) {
-      dispatch(StoreLogin(currentUser));
-      navigate('/');
-      return;
-    }
+    //   const currentUser = await authService.getCurrentUser();
+    // // If there's already a logged-in user, navigate directly
+    // if (currentUser) {
+    //   dispatch(StoreLogin(currentUser));
+    //   navigate('/');
+    //   return;
+    // }
       
 
       const session  = await authService.login(data)
       if(session){
         const userData = await authService.getCurrentUser()
+        
         if(userData) dispatch(StoreLogin(userData)) //store updates the user data in Redux
           navigate('/')
       }
       
     } catch (error) {
-      setError(error.message)
+      // setError(error.message)
+      toast.error("wrong email or password",{
+        position:'top-right'
+      })
       
     }
   }

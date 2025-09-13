@@ -4,11 +4,18 @@ import appwriteService from '../Appwrite/config'
 
 export const fetchAllPosts = createAsyncThunk(
   'posts/fetchAllPosts',
-  async ()=>{
-    const res = await appwriteService.getPosts()
+  async (_, thunkAPI)=>{
+    try {
+       const res = await appwriteService.getPosts()
     //  console.log("Fetched posts:", res); 
 
     return res?.documents|| []
+      
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message || 'failed to fetch post')
+      
+    }
+   
   },
 
 )
@@ -16,16 +23,40 @@ export const fetchAllPosts = createAsyncThunk(
 
 export const getPostbyId = createAsyncThunk(
   'posts/getPostbyId',
-  async(slug)=>{
-    const res = await appwriteService.getPost(slug)
+  async(slug,_,thunkAPI)=>{
+   try {
+     const res = await appwriteService.getPost(slug)
     return res 
+    
+   } catch (error) {
+    thunkAPI.rejectWithValue(error.message || "failed to fetch single post")
+    
+   }
 
   }
 
 )
+export const getFileView = createAsyncThunk(
+  'posts/getfileview',
+  async(fileId,_,thunkAPI)=>{
+   try {
+     const res = await appwriteService.getFileView(fileId)
+    return {fileId,res}
+    
+   } catch (error) {
+    thunkAPI.rejectWithValue(error.message || "failed to fetch  file view")
+    
+   }
+
+  }
+
+)
+
+
 const initialState = {
   allPosts: [],
   currentPost: null,
+  fileview: {},
   status: 'idle', 
   error: null
 }
@@ -37,6 +68,7 @@ const PostSlice = createSlice({
     clearCurrentPost(state){
       state.currentPost = null
     },
+  
   
   },
   extraReducers: (builder)=>{
@@ -59,7 +91,7 @@ const PostSlice = createSlice({
         state.error = null
       })
       .addCase(getPostbyId.fulfilled,(state,action)=>{
-        state.status = 'fullfilled'
+        state.status = 'succeeded'
         state.currentPost = action.payload
 
       })
@@ -69,9 +101,14 @@ const PostSlice = createSlice({
 
 
       })
+      .addCase(getFileView.fulfilled,(state,action)=>{
+        const {fileId,res} = action.payload
+        state.fileview[fileId] = res
+        
+      })
   },
 
   })
 
-  export const {clearCurrentPost} = PostSlice.actions
+  export const {clearCurrentPost,fileView} = PostSlice.actions
   export default PostSlice.reducer

@@ -1,40 +1,34 @@
 import React ,{useState,useEffect}from 'react'
-import appwriteService from '../Appwrite/config'
 import { Container } from '../Components'
 import PostCard from '../Components/Postcard/PostCard'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllPosts } from '../Store/PostSlice'
 import {  motion } from 'framer-motion';
+import LoadingSkeleton from '../Components/LoadingSkeleton'
 
 function Home() {
 
   const dispatch = useDispatch()
   const {allPosts,status} = useSelector(state=>state.posts)
 
-const latestPosts = 
-   [...allPosts]
-  .sort((a,b)=> new Date(b.$createdAt) -  new Date(a.$createdAt))
-  .slice(0,8)
 
 
-
-
- 
-
-
+const latestPosts = React.useMemo(() => {
+  return [...allPosts]
+    .sort((a, b) => new Date(b.$createdAt) - new Date(a.$createdAt))
+    .slice(0, 8);
+}, [allPosts]);
   
-
+  
   useEffect(() => {
     if(status === 'idle'){
       dispatch(fetchAllPosts()) 
 
     }
-  }, [dispatch])
+  }, [dispatch,status])
 
   if (status === 'loading') {
-  return (
- null
-  );
+  return <LoadingSkeleton />
 }
 
 if( status === 'succeeded' && allPosts.length === 0){

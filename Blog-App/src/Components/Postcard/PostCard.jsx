@@ -1,27 +1,20 @@
 import React, { useEffect } from 'react'
-import appwriteService from '../../Appwrite/config'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { getFileView } from '../../Store/PostSlice'
 
 function PostCard({post}) {
-  const [preview, setPreview] = useState(null)
+  const dispatch = useDispatch()
+  const {fileview} = useSelector(state=>state.posts)
+  const imageUrl = fileview[post.featuredimage]
   const localimg = '/images.jpg'
   useEffect(() => {
-  const loadPreview = async ()=>{
-    if(post?.featuredimage){
-      try {
-        const Preview = await appwriteService.getFileView(post.featuredimage)
-        setPreview(Preview)
-        
-      } catch (error) {
-        console.error("err"),error
-        
-      }
-    }
+  
+  if(post?.featuredimage){
+    dispatch(getFileView(post.featuredimage))
   }
-  loadPreview()
-  }, [post])
+  }, [dispatch,post?.featuredimage,imageUrl])
   
 
   if(!post) return null
@@ -32,10 +25,9 @@ function PostCard({post}) {
       <div className='w-full  bg-gray-400 hover:bg-gray-300  transition ease-in-out duration-400 rounded-md p-1 '>
         <div className='w-full justify-center mb-4'>
           <img 
-          className='rounded-md w-70 h-40  '
-          src={preview}
-          // onError={(e)=>{e.currentTarget.src = localimg}}
-          // onError={(e)=> {e.currentTarget.src = localimg}}
+          className='rounded-md w-70 h-35 '
+          src={imageUrl || localimg}
+          onError={(e)=>{e.currentTarget.src = localimg}}
 
            />
 

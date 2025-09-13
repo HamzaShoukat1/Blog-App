@@ -6,13 +6,12 @@ import { Outlet } from 'react-router-dom'
 import {login ,logout,setPending} from './Store/AuthSlice'
 import { Loaderworking } from './Loader/Loaderworking'
 import { useLocation } from 'react-router-dom'
-
+import toast from 'react-hot-toast'
 import {Toaster} from 'react-hot-toast'
 
 function App() {
  
   const dispatch = useDispatch()
-  const authStatus = useSelector((state)=> state.auth.status)
   const status = useSelector(state=> state.posts.status)
 
 
@@ -21,10 +20,9 @@ function App() {
     dispatch(setPending())
     authService.getCurrentUser()
     .then((userData)=>{
-          console.log("User detected on load:", userData)
-
       if(userData){
         dispatch(login(userData)) //We tell Redux: "The user is logged in."
+     
       }else{
         dispatch(logout())  
       }
@@ -45,22 +43,22 @@ function App() {
         <main>
           <Outlet />
         </main>
-        {status === 'succeeded' && <Footer />}
+        {status === 'succeeded' && !hideHeader && <Footer />}
         <Toaster
           position='top-center'
-          toastOptions={{
-            duration: 3000,
-            style: {
-              background: '#333',
-              color: '#fff',
-            },
-            success: {
-              iconTheme: {
-                primary: '#4ade80',
-                secondary: '#fff',
-              },
-            },
-          }}
+          // toastOptions={{
+          //   duration: 3000,
+          //   style: {
+          //     background: '#333',
+          //     color: '#fff',
+          //   },
+          //   success: {
+          //     iconTheme: {
+          //       primary: '#4ade80',
+          //       secondary: '#fff',
+          //     },
+          //   },
+          // }}
         />
       </div>
     </div>
