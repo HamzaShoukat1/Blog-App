@@ -76,7 +76,7 @@ function Postform({post}) {
         
         if(dbpost){
           console.log("Created post:", dbpost); 
-          dispatch(fetchAllPosts())
+          // dispatch(fetchAllPosts())
           navigate(`/post/${dbpost.$id}`)
         }
         setsubmitError(errors.message)
@@ -86,6 +86,8 @@ function Postform({post}) {
 
   }
   
+
+
 
   const slugTransform = useCallback((value)=>{
     if(value && typeof  value === 'string')
@@ -100,15 +102,10 @@ function Postform({post}) {
       return ''
 
   },[])
-//   {submitError && (
-//   <div className="w-full text-red-500 text-sm p-2">
-//     {submitError}
-//   </div>
-// )}
-
 
   React.useEffect(()=>{
     const subscription = watch((value,{name})=>{
+
       if(name === 'title'){
         setValue('slug', slugTransform(value.title,
           {shouldValidate:true}
@@ -119,6 +116,9 @@ function Postform({post}) {
       subscription.unsubscribe()
     }
   },[watch,slugTransform,setValue])
+
+ 
+  
 
 
 
@@ -137,8 +137,8 @@ function Postform({post}) {
     register={register}
     errors={errors}
     control={control}
-    getValues={getValues}
-    setValue={setValue}
+    // getValues={getValues}
+    // setValue={setValue}
     />
 
    </div>

@@ -1,6 +1,5 @@
 import React, {useState,useEffect} from 'react'
 import { Container } from '../Components'
-import appwriteService from "../Appwrite/config"
 import { useDispatch,useSelector } from 'react-redux'
 import PostCard from '../Components/Postcard/PostCard'
 import { fetchAllPosts } from '../Store/PostSlice'
@@ -12,7 +11,7 @@ const {allPosts} = useSelector(state=> state.posts)
    dispatch(fetchAllPosts())
 
    
-  }, [dispatch])
+  }, [dispatch,allPosts])
 
 
   
@@ -28,8 +27,6 @@ const {allPosts} = useSelector(state=> state.posts)
 
           </div>
         ))}
-
-
       </div>
       </Container>
       

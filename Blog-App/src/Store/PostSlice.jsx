@@ -5,6 +5,7 @@ import appwriteService from '../Appwrite/config'
 export const fetchAllPosts = createAsyncThunk(
   'posts/fetchAllPosts',
   async (_, thunkAPI)=>{
+    await new Promise((resolve)=> setTimeout(resolve,600))
     try {
        const res = await appwriteService.getPosts()
     //  console.log("Fetched posts:", res); 
@@ -42,11 +43,13 @@ export const getFileView = createAsyncThunk(
    try {
      const res = await appwriteService.getFileView(fileId)
     return {fileId,res}
-    
    } catch (error) {
     thunkAPI.rejectWithValue(error.message || "failed to fetch  file view")
     
    }
+
+    
+
 
   }
 

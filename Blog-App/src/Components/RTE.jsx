@@ -10,22 +10,20 @@ export default function RTE({control,name, label,}){
         </label>}
 
         <Controller
-
         name={name || "content"}
         control={control}
                 rules={{ required: "Content is required" }} 
+                
         render={({field: {onChange},fieldState:{error}})=> (
-        
       <>
+    
           {error && (
               <p className="text-red-600 text-sm mt-1">{error.message}</p> 
             )}
-          <Editor
+            
+                <Editor
         
             onEditorChange={onChange}
-        // value={value}
-
-
   init={
    {branding: false,
      height: 400,
@@ -59,11 +57,12 @@ export default function RTE({control,name, label,}){
 
    }
   }
-   /> 
+   />
+      
+      
       </>
           
         )}
-
        />
 
     </div>

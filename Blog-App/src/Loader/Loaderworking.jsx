@@ -3,10 +3,10 @@ import { useLocation } from "react-router-dom";
 import useLoader from "../Loader/Loader";
 import { AnimatePresence, motion } from "framer-motion";
 import '../../src/index.css'
+import {Loader} from '../Loader/Loader.jsx'
 export const Loaderworking =  ()=>{
   
   const location = useLocation()
-
   const {loading, setLoading} = useLoader()
   
 
@@ -31,13 +31,13 @@ export const Loaderworking =  ()=>{
       {loading && (
           <motion.div
           key='loader'
-      className="loader-wrapper"
       initial={{opacity:0}}
       animate={{opacity: 1}}
       exit={{opacity:0}}
       transition={{duration:0.4, ease: 'easeOut'}}
       >
-     <div className="loader"></div>
+     <Loader />
+        
       </motion.div>
       )}
     

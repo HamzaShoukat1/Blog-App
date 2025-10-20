@@ -24,7 +24,7 @@ const router = createBrowserRouter(
     <Route  path = '/' element={<App />}
     errorElement={<ErrorPage />}
     >
-      <Route path='/' element={<Home />} />
+      <Route index element={<Home />} />
      <Route element={<AuthDesign />}>
        <Route path='/login' element={(
         <AuthLayout authentication={false}>

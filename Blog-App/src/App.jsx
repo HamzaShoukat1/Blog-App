@@ -12,7 +12,6 @@ import {Toaster} from 'react-hot-toast'
 function App() {
  
   const dispatch = useDispatch()
-  const status = useSelector(state=> state.posts.status)
 
 
 
@@ -43,22 +42,11 @@ function App() {
         <main>
           <Outlet />
         </main>
-        {status === 'succeeded' && !hideHeader && <Footer />}
+        { <Footer />}
         <Toaster
           position='top-center'
-          // toastOptions={{
-          //   duration: 3000,
-          //   style: {
-          //     background: '#333',
-          //     color: '#fff',
-          //   },
-          //   success: {
-          //     iconTheme: {
-          //       primary: '#4ade80',
-          //       secondary: '#fff',
-          //     },
-          //   },
-          // }}
+         
+       
         />
       </div>
     </div>

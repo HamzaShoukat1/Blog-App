@@ -10,6 +10,7 @@ function Home() {
 
   const dispatch = useDispatch()
   const {allPosts,status} = useSelector(state=>state.posts)
+  const authStatus = useSelector((state)=> state.auth.status)
 
 
 
@@ -21,17 +22,16 @@ const latestPosts = React.useMemo(() => {
   
   
   useEffect(() => {
-    if(status === 'idle'){
-      dispatch(fetchAllPosts()) 
+  if ( authStatus === 'fulfilled' && status === 'idle' ) {
+    dispatch(fetchAllPosts())
+  }
+}, [dispatch, status, authStatus])
 
-    }
-  }, [dispatch,status])
-
-  if (status === 'loading') {
+  if (status === 'loading' ) {
   return <LoadingSkeleton />
 }
 
-if( status === 'succeeded' && allPosts.length === 0){
+if( authStatus !== 'fulfilled'){
   return (
     <div className='w-full bg-gray-500  bg-gradient-to-b from-gray-500 via-gray-700 to-gray-700 py-26 items-center    mt-2 text-center'>
       <Container>

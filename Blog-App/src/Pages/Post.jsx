@@ -8,6 +8,7 @@ import ConfirmDialog from '../Components/Popups/ConfirmDialogue';
 import appwriteService from '../Appwrite/config';
 import { getFileView } from '../Store/PostSlice';
 import { clearCurrentPost, getPostbyId } from '../Store/PostSlice';
+import { fetchAllPosts } from '../Store/PostSlice';
 
 
 
@@ -50,9 +51,10 @@ function Post() {
 
   // Delete Post
   const deletePost = () => {
-    appwriteService.deletePost(currentPost.$id).then((status) => {
+    appwriteService.deletePost(currentPost?.$id).then((status) => {
       if (status) {
-        appwriteService.deleteFile(currentPost.featuredimage);
+        appwriteService.deleteFile(currentPost?.featuredimage);
+        dispatch(fetchAllPosts()) 
         navigate('/');
         toast.success('Post deleted successfully!');
       }
@@ -75,7 +77,7 @@ function Post() {
 
   // Loading / Error States
   if (status === 'loading') {
-    return <p className="text-center p-4"></p>;
+    return <p className='flex justify-center items-center top-20'>loder banaan he single post kelie</p>
   }
 
   if (status === 'failed') {
@@ -89,12 +91,15 @@ function Post() {
         <div className="w-full flex justify-center mb-3 relative border rounded-md p-4">
             <img
                src={imageUrl || localFallbackImage}
+
               alt={currentPost.title}
               className="rounded-xl w-2xl"  
               onError={(e) => {
                 e.currentTarget.src = localFallbackImage;
               }}
+
             />
+
 
 
           {/* Author Controls */}

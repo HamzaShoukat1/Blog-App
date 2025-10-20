@@ -1,38 +1,27 @@
-import React,{useEffect,useState} from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-export default function Protected({children, authentication = true}){
-
+export default function Protected({ children, authentication = true }) {
   const navigate = useNavigate()
-  const authStatus = useSelector((state)=> state.auth.status)
+  const authStatus = useSelector((state) => state.auth.status)
 
-  
   useEffect(() => {
-    const isLogedin = authStatus === 'fulfilled'
-    // todo make it easy
-    // if(authStatus === true){
-    //   navigate('/')
+    if (authStatus === 'idle' || authStatus === 'pending') {
+      // Still loading, do nothing yet
+      return
+    }
 
-    // }
-    // else if(authStatus === false){
-    //   navigate("/login")
-    // }
+    if (authentication && authStatus !== 'fulfilled') {
+      // User is NOT authenticated, but trying to access protected route
+      navigate('/login')
+    }
 
-  if(authentication && !isLogedin){
-    navigate('/login')  // User is not authenticated, redirect to login
-  } else if(!authentication && isLogedin){ 
-    navigate('/')       // User is authenticated but shouldn't access this page, redirect to home
-  }
-}, [authStatus, navigate, authentication])
+    if (!authentication && authStatus === 'fulfilled') {
+      // User is authenticated but trying to access guest-only route
+      navigate('/')
+    }
+  }, [authStatus, navigate, authentication])
 
- if (authStatus === 'idle' || authStatus === 'pending') {
-    return <h1>Loading...</h1>;
-  }
-
-
-  return    <>{children}</>
-
+  return <>{children}</>
 }
-
-

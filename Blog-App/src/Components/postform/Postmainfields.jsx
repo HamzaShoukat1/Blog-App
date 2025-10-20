@@ -9,9 +9,10 @@ const PostMainFields = ({ register, errors, control }) => {
         placeholder='Title'
         className='mb-4 '
         {...register('title', { required: 'Title is required' })}
+
       />
       {errors.title && (
-        <p className='text-red-500 text-sm'>{errors.title.message}</p>
+        <p className='text-red-600 text-sm'>{errors.title.message}</p>
       )}
 
       <Input
@@ -26,6 +27,7 @@ const PostMainFields = ({ register, errors, control }) => {
         label='Content'
         name='content'
         control={control}
+        defaultValue=""
       />
     </div>
   )
