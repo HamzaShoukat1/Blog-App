@@ -24,7 +24,7 @@ export class AuthService {
       );
 
       if (userAccount) {
-        return await this.login({ email, password });
+        return await this.login({email, password });
       }
       return userAccount;
     } catch (error) {
@@ -47,10 +47,8 @@ export class AuthService {
   async getCurrentUser() {
     
     try {
-      // This will throw if no active session exists
       const user = await this.account.get(); 
       console.log("Current user session:", user);
-      
       return user;
     } catch (error) {
       console.log("No active session:", error.message);
@@ -59,7 +57,6 @@ export class AuthService {
   }
 
   async logout() {
-  
   try {
     await this.account.deleteSession('current');
     console.log("Successfully logged out");

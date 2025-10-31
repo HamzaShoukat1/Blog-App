@@ -30,7 +30,6 @@ function Login() {
       const session  = await authService.login(data)
       if(session){
         const userData = await authService.getCurrentUser()
-        
         if(userData) dispatch(StoreLogin(userData)) //store updates the user data in Redux
           navigate('/')
       }

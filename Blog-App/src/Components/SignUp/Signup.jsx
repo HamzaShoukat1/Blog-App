@@ -15,21 +15,23 @@ import toast from "react-hot-toast";
   
 
   const create = async(data)=>{
+    console.log("2221",data)
     setError("")
     try {
       const session = await authService.createAccount(data)
 
       if(session) {
         toast.success("Account Created Successfully",{
-          position:'top-right'
+          position:'top-right',
+          // width: '12px'
         })
-        const userData = await authService.getCurrentUser()
+        if(session){
+          const userData = await authService.getCurrentUser()
+          if(userData) dispatch(login(userData))
+            navigate('/')
+        }
         
-        if(userData) dispatch(login(userData))
           
-          navigate('/')
-
-        // navigate("/login")
 
 
 }
@@ -57,17 +59,16 @@ import toast from "react-hot-toast";
       <div className="mb-2 justify-center">
         <span className="inline-block w-full  max-w-[100px]">
           <Logo width="100%" />
-
         </span>
       </div>
       {/* // */}
 
         <h2  className='text-center text-2xl font-bold'>Sign up to create account</h2>
-            <p className='mt-2 text-center text-base  text-black/60'>
+            <p className='mt-2 text-center text-[14px]  text-black/60'>
             Don't have any account?&nbsp;
             <Link 
             to="/login"
-            className='font-medium text-base transition-all duration-200 hover:underline'
+            className='font-medium text-[14px] transition-all duration-200 hover:underline'
             > 
            Login
             </Link>
@@ -81,7 +82,8 @@ import toast from "react-hot-toast";
             label='Full Name'
             placeholder='Enter Your Full Name'
             {...register("name",{
-              required:"Full name is required"
+              required:"Full name is required",
+              message: "plz enter your name"
 
             })}
             />
@@ -144,6 +146,8 @@ import toast from "react-hot-toast";
 
 
       </div>
+
+
     </div>
   )
 

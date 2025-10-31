@@ -45,8 +45,6 @@ function App() {
         { <Footer />}
         <Toaster
           position='top-center'
-         
-       
         />
       </div>
     </div>

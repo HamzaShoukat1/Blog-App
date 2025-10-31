@@ -8,7 +8,6 @@ export default function Protected({ children, authentication = true }) {
 
   useEffect(() => {
     if (authStatus === 'idle' || authStatus === 'pending') {
-      // Still loading, do nothing yet
       return
     }
 
@@ -23,5 +22,9 @@ export default function Protected({ children, authentication = true }) {
     }
   }, [authStatus, navigate, authentication])
 
-  return <>{children}</>
+  return  <>
+
+  {children}
+
+  </>
 }

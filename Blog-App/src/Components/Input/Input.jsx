@@ -16,7 +16,6 @@ const Input = React.forwardRef(function Input({
         {label}
         </label>
         }
-        
         <input
         type={type}
         className={`px-4 py-2 w-full  focus:border-gray-400 rounded-lg bg-white text-black outline-none border border-gray-200 ${className} `} 
@@ -26,8 +25,6 @@ const Input = React.forwardRef(function Input({
         />
     </div>
   )
-  
-
 })
 
 export default Input

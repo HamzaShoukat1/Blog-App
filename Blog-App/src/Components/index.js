@@ -12,6 +12,7 @@ import Postform from './postform/Postform'
 import Postcard from './Postcard/PostCard'
 import AuthLayout from '../Components/AuthLayout/AuthLayout'
 import Signup from '../Components/SignUp/Signup'
+import { PostLoading } from "../PostLoadingskeleton";
 
 export{
   Header,
@@ -28,4 +29,5 @@ export{
   Postcard,
   AuthLayout,
   Signup,
+  PostLoading
 }

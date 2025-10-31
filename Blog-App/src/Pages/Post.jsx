@@ -9,7 +9,7 @@ import appwriteService from '../Appwrite/config';
 import { getFileView } from '../Store/PostSlice';
 import { clearCurrentPost, getPostbyId } from '../Store/PostSlice';
 import { fetchAllPosts } from '../Store/PostSlice';
-
+import {PostLoading} from '../../src/Components/index.js'
 
 
 function Post() {
@@ -77,7 +77,9 @@ function Post() {
 
   // Loading / Error States
   if (status === 'loading') {
-    return <p className='flex justify-center items-center top-20'>loder banaan he single post kelie</p>
+     return (
+     <PostLoading />)
+
   }
 
   if (status === 'failed') {

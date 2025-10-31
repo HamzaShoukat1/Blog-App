@@ -6,7 +6,7 @@ import '../../src/index.css'
 import {Loader} from '../Loader/Loader.jsx'
 export const Loaderworking =  ()=>{
   
-  const location = useLocation()
+  // const location = useLocation()
   const {loading, setLoading} = useLoader()
   
 
@@ -20,7 +20,7 @@ export const Loaderworking =  ()=>{
       clearTimeout(timer)
     }
    
-  }, [location])
+  }, [])
  
    useEffect(() => {
     document.body.style.overflow = loading ? "hidden" : "";

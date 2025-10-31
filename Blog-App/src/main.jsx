@@ -25,12 +25,12 @@ const router = createBrowserRouter(
     errorElement={<ErrorPage />}
     >
       <Route index element={<Home />} />
+      
      <Route element={<AuthDesign />}>
        <Route path='/login' element={(
         <AuthLayout authentication={false}>
           <Login />
-        </AuthLayout>
-        
+        </AuthLayout> 
       )} />
       <Route path='/signup' element={(
         <AuthLayout authentication={false}>
@@ -38,6 +38,8 @@ const router = createBrowserRouter(
         </AuthLayout>
       )} />
      </Route>
+
+
 
       <Route path='/all-posts' element={(
         <AuthLayout authentication={true}>

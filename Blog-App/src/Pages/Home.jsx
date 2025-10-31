@@ -28,10 +28,14 @@ const latestPosts = React.useMemo(() => {
 }, [dispatch, status, authStatus])
 
   if (status === 'loading' ) {
-  return <LoadingSkeleton />
+  return <LoadingSkeleton />  
 }
 
-if( authStatus !== 'fulfilled'){
+
+if(authStatus === 'loading' || authStatus === 'idle'){
+  return <LoadingSkeleton />
+}
+if( authStatus !== 'fulfilled' && authStatus !== "idle"){
   return (
     <div className='w-full bg-gray-500  bg-gradient-to-b from-gray-500 via-gray-700 to-gray-700 py-26 items-center    mt-2 text-center'>
       <Container>

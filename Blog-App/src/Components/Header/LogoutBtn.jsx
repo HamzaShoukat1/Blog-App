@@ -21,7 +21,7 @@ function LogoutBtn() {
   }
 
 
-const handleDelete = ()=>{
+const handleShow = ()=>{
   setShowConfirm(true)
 }
 const handleCancel = ()=>{
@@ -37,7 +37,7 @@ const handleConfirm = ()=>{
    <>
       {/* Logout button that opens the confirmation modal */}
       <button
-      onClick={handleDelete}
+      onClick={handleShow}
         className='inline-block  px-3 py-2 mt-1 font-semibold bg-black/100   text-base text-white rounded-xs duration-200  cursor-pointer'
       >
         Logout
